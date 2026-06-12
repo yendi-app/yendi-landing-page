@@ -25,6 +25,45 @@ import '../styles/steps.css';
   </div>
 </section>
 
+<script>
+  // Replace with your Google Apps Script Web App URL (ends in /exec)
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZHvZILIdHwkprDjDS5Zg04sYXRg6ou2r_-QIDs0TzUQfet5YFlXXTkxx5GWyLisz_aA/exec';
+
+  const form = document.getElementById('form2');
+  const email = document.getElementById('email2') as HTMLInputElement | null;
+  const hint = document.getElementById('hint2');
+
+  form?.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    if (!email || !hint) return;
+
+    const value = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      hint.textContent = 'Ingresa un correo válido.';
+      hint.classList.remove('ok');
+      email.focus();
+      return;
+    }
+
+    hint.textContent = 'Enviando...';
+    hint.classList.remove('ok');
+
+    const body = new FormData();
+    body.append('email', value);
+
+    try {
+      await fetch(SCRIPT_URL, { method: 'POST', body });
+      hint.textContent = '¡Listo! Te avisamos pronto. ✦';
+      hint.classList.add('ok');
+      email.value = '';
+      email.blur();
+    } catch {
+      hint.textContent = 'Algo salió mal. Intenta de nuevo.';
+      hint.classList.remove('ok');
+    }
+  });
+</script>
+
 <style>
   /* ---- finale-specific overrides of the shared .step/.step-k shell ---- */
   .finale {
