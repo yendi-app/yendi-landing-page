@@ -19,6 +19,12 @@ html {
   scroll-snap-type: y proximity;
 }
 
+@media (max-width: 860px) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
+}
+
 body {
   min-height: 100%;
   overflow-x: hidden;
