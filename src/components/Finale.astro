@@ -1,8 +1,3 @@
----
-
----
-
-<!-- ════ CTA FINAL ════ -->
 <section class="step finale" data-screen-label="CTA final">
   <div class="fin">
     <span class="ymark">yendi<i>.</i></span>
@@ -11,11 +6,293 @@
     <p>Déjanos tu correo y sé de los primeros en probar Yendi.</p>
     <form class="capture" id="form2" novalidate>
       <div class="field">
-        <input id="email2" type="email" inputmode="email" autocomplete="email" placeholder="Email"
-          aria-label="Email" />
+        <input
+          id="email2"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          placeholder="Email"
+          aria-label="Email"
+        />
         <button type="submit">Avísame</button>
       </div>
       <div class="hint" id="hint2">Sé de los primeros en saber.</div>
     </form>
   </div>
 </section>
+
+<style>
+  /* ---- step shell (shared shape with HowToSteps' sections) ---- */
+  .step {
+    position: relative;
+    min-height: 88svh;
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 72px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(34px, 7vw, 96px);
+    scroll-snap-align: center;
+  }
+
+  .step::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 58px;
+    background: linear-gradient(
+      to bottom,
+      rgba(232, 207, 160, 0),
+      rgba(232, 207, 160, 0.42)
+    );
+  }
+
+  .finale {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .step.finale {
+    min-height: 100svh;
+    scroll-snap-align: start;
+  }
+
+  /* ---- "Próximamente" label ---- */
+  .step-k {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--lux-dim);
+  }
+
+  .finale .step-k {
+    justify-content: center;
+  }
+
+  .finale .step-k::before,
+  .finale .step-k::after {
+    content: "";
+    width: 30px;
+    height: 1px;
+    background: var(--lux-faint);
+  }
+
+  /* ---- brand mark ---- */
+  .ymark {
+    font-family: "Clash Display", "Hanken Grotesk", system-ui, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 34px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .ymark i {
+    font-style: inherit;
+    color: var(--lux);
+  }
+
+  /* ---- final pitch ---- */
+  .fin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    max-width: 480px;
+  }
+
+  .fin h2 {
+    font-family: "Clash Display", "Hanken Grotesk", system-ui, sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: clamp(34px, 7vw, 54px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+    background: linear-gradient(180deg, #ffffff 18%, #ecdfc8 92%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .fin h2 em {
+    font-family: "Cormorant", "Clash Display", Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.12em;
+    letter-spacing: 0;
+    color: var(--lux);
+    -webkit-text-fill-color: var(--lux);
+    padding-right: 0.06em;
+  }
+
+  .fin p {
+    font-size: 16px;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+
+  .fin .capture {
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  /* ---- email capture ---- */
+  .capture {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  @property --cc-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    padding: 6px 6px 6px 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition:
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  /* clockwise champagne glow sweeping the rim — signals "this is the action" */
+  .field::before {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    border-radius: inherit;
+    padding: 1.5px;
+    z-index: 1;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--cc-angle),
+      transparent 0deg,
+      transparent 250deg,
+      rgba(232, 207, 160, 0.5) 312deg,
+      #f3e3c2 340deg,
+      rgba(232, 207, 160, 0.5) 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    filter: drop-shadow(0 0 5px rgba(232, 207, 160, 0.55));
+    animation: ccSpin 3.6s linear infinite;
+  }
+
+  @keyframes ccSpin {
+    to {
+      --cc-angle: 360deg;
+    }
+  }
+
+  .field:focus-within {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
+  }
+
+  .field input {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: #f4eae1;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 11px 0;
+  }
+
+  .field input::placeholder {
+    color: rgba(244, 234, 225, 0.42);
+  }
+
+  .field button {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #231a10;
+    background: linear-gradient(180deg, #f7eedd, #e9d6b0);
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition:
+      transform 0.15s ease,
+      filter 0.2s ease;
+  }
+
+  .field button:hover {
+    filter: brightness(1.06);
+  }
+
+  .field button:active {
+    transform: scale(0.96);
+  }
+
+  .hint {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: rgba(244, 234, 225, 0.68);
+    letter-spacing: 0.01em;
+    height: 18px;
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+
+  .hint.ok {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .field::before {
+      animation: none;
+    }
+  }
+
+  /* ---- mobile: full-screen, centered panel ---- */
+  @media (max-width: 860px) {
+    .step.finale {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      justify-content: center;
+      align-items: center;
+      padding: 0 26px;
+    }
+  }
+</style>
