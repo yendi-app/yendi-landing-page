@@ -1,0 +1,94 @@
+---
+
+---
+
+<div class="bg" id="bg" aria-hidden="true">
+  <div class="blob s1"></div>
+  <div class="blob s2"></div>
+  <div class="blob s3"></div>
+  <div class="blob s4"></div>
+  <div class="blob s5"></div>
+  <div class="blob s6"></div>
+  <div class="blob s7"></div>
+  <div class="blob s8"></div>
+  <div class="blob s9"></div>
+</div>
+
+<style>
+  /* ---- z0 : page-wide backdrop = base color + drifting solid color blobs ----
+     position:fixed + 170vh tall so it covers the whole viewport regardless of
+     scroll position; visible through .how's translucent gradient too. The
+     whole layer is blurred as a group into a liquid wash. */
+  .bg {
+    position: fixed;
+    left: -8%;
+    right: -8%;
+    top: -65vh;
+    height: 170vh;
+    z-index: 0;
+    overflow: hidden;
+    transition: background-color 1.8s ease;
+    filter: blur(120px);
+    will-change: filter;
+    animation: bgRotate 16s ease-in-out infinite;
+  }
+
+  .blob {
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    opacity: .9;
+    transition: background-color 1.8s ease;
+    will-change: transform, translate;
+  }
+
+  /* sizes + horizontal placement + organic drift (vertical position is
+     driven entirely by JS via the `translate` property, which composes
+     independently with this `transform` drift). */
+  .s1 { width: 64vmax; height: 64vmax; left: -16vmax; animation: d1 24s ease-in-out infinite; }
+  .s2 { width: 34vmax; height: 34vmax; right: -8vmax; animation: d2 30s ease-in-out infinite; }
+  .s3 { width: 52vmax; height: 52vmax; left: 22vmax; animation: d3 27s ease-in-out infinite; }
+  .s4 { width: 28vmax; height: 28vmax; left: -6vmax; animation: d4 21s ease-in-out infinite; }
+  .s5 { width: 46vmax; height: 46vmax; right: -12vmax; animation: d5 33s ease-in-out infinite; }
+  .s6 { width: 22vmax; height: 22vmax; left: 34vmax; animation: d2 26s ease-in-out infinite; }
+  .s7 { width: 58vmax; height: 58vmax; right: 8vmax; animation: d3 31s ease-in-out infinite; }
+  .s8 { width: 30vmax; height: 30vmax; left: 4vmax; animation: d4 23s ease-in-out infinite; }
+  .s9 { width: 40vmax; height: 40vmax; right: -4vmax; animation: d1 29s ease-in-out infinite; }
+
+  @keyframes bgRotate {
+    0%, 100% { rotate: -1.2deg; }
+    50% { rotate: 1.2deg; }
+  }
+
+  @keyframes d1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(9vmax, 4vmax) scale(1.12); }
+  }
+
+  @keyframes d2 {
+    0%, 100% { transform: translate(0, 0) scale(1.05); }
+    50% { transform: translate(-8vmax, 5vmax) scale(.9); }
+  }
+
+  @keyframes d3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(7vmax, -5vmax) scale(1.1); }
+  }
+
+  @keyframes d4 {
+    0%, 100% { transform: translate(0, 0) scale(.95); }
+    50% { transform: translate(10vmax, -3vmax) scale(1.14); }
+  }
+
+  @keyframes d5 {
+    0%, 100% { transform: translate(0, 0) scale(1.08); }
+    50% { transform: translate(-9vmax, -4vmax) scale(.92); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg,
+    .blob {
+      animation: none !important;
+    }
+  }
+</style>

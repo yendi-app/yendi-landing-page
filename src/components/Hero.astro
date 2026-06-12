@@ -1,0 +1,756 @@
+---
+
+---
+
+<header class="hero" data-screen-label="Hero">
+  <div class="prop" id="prop" aria-hidden="true">
+    <div class="chip" style="left:1.5%;top:24%;--dur:19s;--delay:0s"></div>
+    <div class="chip" style="right:1.5%;top:16%;--dur:20s;--delay:2.8s"></div>
+    <div class="chip" style="left:0.5%;top:50%;--dur:18s;--delay:5.6s"></div>
+    <div class="chip" style="right:0.5%;top:44%;--dur:21s;--delay:8.4s"></div>
+    <div class="chip" style="left:2.5%;top:36%;--dur:19s;--delay:11.2s"></div>
+    <div class="chip" style="right:2.5%;top:56%;--dur:20s;--delay:14s"></div>
+    <div class="chip" style="left:1%;top:60%;--dur:18s;--delay:16.8s"></div>
+  </div>
+
+  <div class="stage">
+    <div class="top">
+      <span class="kicker">Próximamente</span>
+      <span class="ymark">yendi<i>.</i></span>
+      <p class="anchor">La app para armar tus planes</p>
+    </div>
+    <main class="content">
+      <h1 class="headline" aria-label="Sube el nivel de tu tono">
+        <span class="lead" id="lead">Sube el <span class="lvl">nivel</span> de tu</span>
+        <span class="word-wrap"><span class="wordline"><span class="word" id="word">tono</span><span class="caret"
+              id="caret" aria-hidden="true"></span></span></span>
+      </h1>
+    </main>
+    <p class="sub">Coordinar tus reus, por fin <b>fácil y bacán</b></p>
+    <div class="bottom">
+      <form class="capture" id="form" novalidate>
+        <div class="field">
+          <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="Email"
+            aria-label="Email" />
+          <button type="submit">Avísame</button>
+        </div>
+        <div class="hint" id="hint">Sé de los primeros en saber.</div>
+      </form>
+      <a class="scrollcue" href="#how">Mira cómo funciona <i class="chev">↓</i></a>
+    </div>
+  </div>
+</header>
+
+<div class="grain" aria-hidden="true"></div>
+
+<style>
+  /* ---- hero shell (full-viewport first section, snap target) ---- */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    overflow: hidden;
+    z-index: 3;
+    scroll-snap-align: start;
+  }
+
+  /* ---- z1 : floating feature chips suspended in the water ---- */
+  .prop {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+    --propblur: 0.5px;
+  }
+
+  .chip {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    padding: 9px 15px;
+    border-radius: 999px;
+    max-width: 44vw;
+    background: rgba(255, 255, 255, .10);
+    border: 1px solid rgba(255, 255, 255, .22);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    font: 500 13.5px/1 "General Sans", system-ui, sans-serif;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .18);
+    opacity: 0;
+    filter: blur(var(--propblur, 0px));
+    animation: chipFloat var(--dur, 18s) linear var(--delay, 0s) infinite;
+    will-change: transform, opacity;
+  }
+
+  @keyframes chipFloat {
+    0% { opacity: 0; transform: translateY(150px); }
+    9% { opacity: .4; }
+    30% { opacity: .4; }
+    39% { opacity: 0; }
+    100% { opacity: 0; transform: translateY(-210px); }
+  }
+
+  /* feature fragments rendered inside the floating chip slots */
+  .seg {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+    color: rgba(255, 255, 255, .62);
+  }
+
+  .seg.on {
+    background: #fff;
+    color: #161210;
+  }
+
+  .vk {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    background: #3ddc84;
+    color: #10130f;
+    font-weight: 700;
+  }
+
+  /* ---- z2 : film grain ---- */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: .12;
+    mix-blend-mode: screen;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---- z3 : stage / content ---- */
+  .stage {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: max(40px, env(safe-area-inset-top)) 26px max(40px, env(safe-area-inset-bottom));
+  }
+
+  .top {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .46em;
+    text-transform: uppercase;
+    color: var(--lux-dim);
+  }
+
+  .kicker::before,
+  .kicker::after {
+    content: "";
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--lux-faint));
+  }
+
+  .kicker::after {
+    background: linear-gradient(90deg, var(--lux-faint), transparent);
+  }
+
+  .ymark {
+    font-family: "Clash Display", "Hanken Grotesk", system-ui, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 27px;
+    letter-spacing: -.02em;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .ymark i {
+    font-style: inherit;
+    color: var(--lux);
+  }
+
+  .anchor {
+    font-family: "General Sans", system-ui, sans-serif;
+    font-size: clamp(15px, 4vw, 17px);
+    font-weight: 600;
+    color: rgba(244, 234, 225, .92);
+    letter-spacing: -.005em;
+  }
+
+  .content {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .bottom {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ---- headline / typewriter ---- */
+  .headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: "Clash Display", "Hanken Grotesk", system-ui, sans-serif;
+  }
+
+  @media (min-height: 760px) {
+    .headline {
+      gap: 0;
+    }
+  }
+
+  .lead {
+    width: 100%;
+    font-weight: 500;
+    font-size: clamp(26px, 8vw, 35px);
+    letter-spacing: -.01em;
+    word-spacing: .18em;
+    color: #f4eae1;
+    line-height: 1.1;
+    opacity: 1;
+    transition: opacity .42s ease, transform .42s ease;
+  }
+
+  .lead .lvl {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .word-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.05em;
+    width: 100%;
+    margin: 0;
+  }
+
+  .wordline {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .word {
+    display: inline-block;
+    line-height: .92;
+    text-align: center;
+    font-weight: 700;
+    font-style: italic;
+    font-size: clamp(48px, 13.5vw, 86px);
+    letter-spacing: -.02em;
+    color: #fff;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, .45);
+    text-wrap: balance;
+    transition: opacity .45s ease, transform .45s ease, filter .45s ease;
+  }
+
+  .swap-out {
+    opacity: 0;
+    transform: translateY(-14px);
+    filter: blur(9px);
+  }
+
+  .swap-out-lt {
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+
+  .caret {
+    display: inline-block;
+    width: .5em;
+    height: max(5px, .075em);
+    margin-left: .12em;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 2px 22px rgba(0, 0, 0, .4);
+    vertical-align: baseline;
+    transform: skewX(-11deg);
+    animation: blink 1.05s steps(1, end) infinite;
+  }
+
+  .caret.typing {
+    animation: none;
+    opacity: 1;
+  }
+
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .sub {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 26px;
+    text-align: center;
+    font-size: clamp(15px, 4vw, 18px);
+    font-weight: 500;
+    color: rgba(244, 234, 225, 1);
+    line-height: 1.4;
+    letter-spacing: -.005em;
+    text-wrap: pretty;
+  }
+
+  .sub b {
+    display: block;
+    margin-top: 5px;
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.5em;
+  }
+
+  /* ---- email capture ---- */
+  .capture {
+    margin-top: 0;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  @property --cc-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, .055);
+    border: 1.5px solid rgba(255, 255, 255, .14);
+    border-radius: 16px;
+    padding: 6px 6px 6px 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: border-color .35s ease, box-shadow .35s ease;
+  }
+
+  /* clockwise champagne glow sweeping the rim — signals "this is the action" */
+  .field::before {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    border-radius: inherit;
+    padding: 1.5px;
+    z-index: 1;
+    pointer-events: none;
+    background: conic-gradient(from var(--cc-angle), transparent 0deg, transparent 250deg, rgba(232, 207, 160, .5) 312deg, #f3e3c2 340deg, rgba(232, 207, 160, .5) 360deg);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    filter: drop-shadow(0 0 5px rgba(232, 207, 160, .55));
+    animation: ccSpin 3.6s linear infinite;
+  }
+
+  @keyframes ccSpin {
+    to { --cc-angle: 360deg; }
+  }
+
+  .field:focus-within {
+    border-color: rgba(255, 255, 255, .5);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, .12);
+  }
+
+  .field input {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: #f4eae1;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 11px 0;
+  }
+
+  .field input::placeholder {
+    color: rgba(244, 234, 225, .42);
+  }
+
+  .field button {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: #231a10;
+    background: linear-gradient(180deg, #f7eedd, #e9d6b0);
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition: transform .15s ease, filter .2s ease;
+  }
+
+  .field button:hover {
+    filter: brightness(1.06);
+  }
+
+  .field button:active {
+    transform: scale(.96);
+  }
+
+  .hint {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: rgba(244, 234, 225, .68);
+    letter-spacing: .01em;
+    height: 18px;
+    text-align: center;
+    transition: color .3s ease;
+  }
+
+  .hint.ok {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ---- scroll cue ---- */
+  .scrollcue {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--lux-dim);
+    text-decoration: none;
+    transition: color .25s ease;
+  }
+
+  .scrollcue:hover {
+    color: var(--lux-bright);
+  }
+
+  .scrollcue .chev {
+    display: inline-block;
+    font-style: normal;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .scrollcue .chev {
+      animation: cueBob 1.6s ease-in-out infinite;
+    }
+
+    @keyframes cueBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+  }
+
+  /* ---- reduced motion: collapse all decorative animation ---- */
+  @media (prefers-reduced-motion: reduce) {
+    .chip {
+      animation: none;
+      opacity: .5;
+    }
+
+    .field::before {
+      animation: none;
+    }
+
+    .caret {
+      animation: none !important;
+      opacity: 1;
+    }
+
+    .word,
+    .lead {
+      transition: opacity .4s ease;
+    }
+
+    .swap-out,
+    .swap-out-lt {
+      transform: none;
+      filter: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    // Fixed, ordered list. base = canvas color; cols = the 5 blob colors.
+    // Headline frame is static ("Sube tu ___ de nivel.") — only the word swaps.
+    const ITEMS = [
+      {
+        word: "tono", base: "#0d0a1f",
+        cols: ["#ff2e9a", "#7b3ff5", "#19d3ff", "#b6ff3d", "#ff2e9a"]
+      },
+      {
+        word: "cumple", base: "#3a0f2e",
+        cols: ["#ff4f9e", "#ff8a3d", "#ffd23d", "#36d0ff", "#ff5db0"]
+      },
+      {
+        word: "reu", base: "#7a2f1e",
+        cols: ["#ff6a3d", "#ff9e2c", "#ffd23d", "#ff4d8d", "#2fb6a8"]
+      },
+      {
+        word: "parrillada", base: "#0a0504",
+        cols: ["#7a0f0a", "#d11d0a", "#ff3b1f", "#ff6a2c", "#fff3e6"]
+      },
+      {
+        word: "previa", base: "#221016",
+        cols: ["#ffb04d", "#ff7d6b", "#e0489a", "#ffd089", "#ff9e6b"]
+      },
+      {
+        word: "Halloween", base: "#160b22",
+        cols: ["#8a26e0", "#a83ff5", "#2fa343", "#1f8a34", "#ff7a18"]
+      },
+      {
+        word: "after", base: "#05060e",
+        cols: ["#ff1f8f", "#11d6ff", "#6a2bff", "#3a1aff", "#c81fff"]
+      },
+      {
+        word: "fin de año", base: "#0a1024",
+        cols: ["#ffd24d", "#ff5db0", "#56cdff", "#6bff9e", "#ffffff"]
+      },
+      {
+        word: "viaje", base: "#0e2e34",
+        cols: ["#3fd6c4", "#ff8a6b", "#ffd98a", "#5cc6ff", "#8fe6b0"]
+      },
+      {
+        word: "graduación", base: "#8a6a30",
+        cols: ["#f6e2ad", "#e6c87a", "#c89a52", "#a37c3a", "#f0d68f"]
+      },
+      {
+        word: "boda", base: "#b58e92",
+        cols: ["#f7ddc8", "#eec5bd", "#dba2aa", "#c58a8f", "#f0cdbd"]
+      },
+      {
+        word: "quince", base: "#b8447a",
+        cols: ["#ffb0d0", "#ff7cb0", "#e25c95", "#c2417c", "#ff9ec4"]
+      },
+    ];
+
+    const bg = document.getElementById('bg');
+    const blobs = [
+      document.querySelector('.s1'),
+      document.querySelector('.s2'),
+      document.querySelector('.s3'),
+      document.querySelector('.s4'),
+      document.querySelector('.s5'),
+      document.querySelector('.s6'),
+      document.querySelector('.s7'),
+      document.querySelector('.s8'),
+      document.querySelector('.s9'),
+    ];
+    const wordEl = document.getElementById('word');
+    // lead ("Sube tus") and tail ("de nivel.") are static — they never swap.
+
+    // ---- palette + text application ----
+    function apply(it) {
+      bg.style.backgroundColor = it.base;
+      for (let k = 0; k < blobs.length; k++) {
+        blobs[k].style.backgroundColor = it.cols[k % it.cols.length];
+      }
+    }
+
+    // ---- infinite upward conveyor --------------------------------------------
+    // Each blob owns a phase in [0,1). Every frame we advance a shared progress
+    // value; each blob's vertical position = ((phase - progress) mod 1) * BAND.
+    // BAND is taller than the visible window, and the layer's top:-65vh margin
+    // means a blob is fully off-screen at both wrap ends — so the teleport is
+    // never visible. The same 9 elements loop forever; nothing is recreated.
+    const SECONDS_PER_LOOP = 7;          // lower = faster upward drift
+    const BAND_VH = 1.7;                 // conveyor height in viewport-heights
+    const N = blobs.length;
+    blobs.forEach(function (b, i) { b._phase = i / N; });
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let start = null;
+
+    function place(progress) {
+      const band = window.innerHeight * BAND_VH;
+      for (let k = 0; k < N; k++) {
+        let f = (blobs[k]._phase - progress) % 1;
+        if (f < 0) f += 1;                // wrap into [0,1)
+        blobs[k].style.translate = '0px ' + (f * band).toFixed(1) + 'px';
+      }
+    }
+
+    function frame(now) {
+      if (start === null) start = now;
+      const progress = ((now - start) / 1000) / SECONDS_PER_LOOP;
+      place(progress);
+      requestAnimationFrame(frame);
+    }
+
+    // ---- boot ----
+    let i = 0;
+    apply(ITEMS[0]);
+    place(0);                            // cover the screen on first paint
+    if (!reduce) requestAnimationFrame(frame);
+
+    // ---- typewriter word cycle (type ▸ hold ▸ erase ▸ recolor ▸ next) ----
+    const caret = document.getElementById('caret');
+    const TYPE = 60, ERASE = 34, HOLD = 1300, GAP = 380;
+    let len, phase, to = null;
+
+    function setTyping(on) { caret.classList.toggle('typing', on); }   // solid while typing, blinks at rest
+    function wait(fn, ms) { to = setTimeout(fn, ms); }
+
+    function tick() {
+      const full = ITEMS[i].word;
+      if (phase === 'type') {
+        setTyping(true);
+        len++;
+        wordEl.textContent = full.slice(0, len);
+        if (len >= full.length) { phase = 'hold'; setTyping(false); wait(tick, HOLD); }
+        else wait(tick, TYPE);
+      } else if (phase === 'hold') {
+        phase = 'erase'; setTyping(true); wait(tick, ERASE);
+      } else if (phase === 'erase') {
+        len--;
+        wordEl.textContent = full.slice(0, Math.max(0, len));
+        if (len <= 0) {
+          phase = 'gap'; setTyping(false);
+          i = (i + 1) % ITEMS.length; apply(ITEMS[i]);   // recolor during the empty pause
+          wait(tick, GAP);
+        } else wait(tick, ERASE);
+      } else {                                           // gap → type the already-applied next word
+        phase = 'type'; tick();
+      }
+    }
+
+    if (reduce) {
+      // no typing animation — just swap the full word + palette
+      caret.style.animation = 'none'; caret.style.opacity = '1';
+      let r = 0;
+      setInterval(function () { r = (r + 1) % ITEMS.length; apply(ITEMS[r]); wordEl.textContent = ITEMS[r].word; }, 2400);
+    } else {
+      // first word is already shown in full (from boot) — hold, then start cycling
+      len = ITEMS[0].word.length; phase = 'hold'; setTyping(false);
+      wait(tick, HOLD);
+      document.addEventListener('visibilitychange', function () {
+        clearTimeout(to);
+        if (!document.hidden) wait(tick, 300);            // resume the chain when tab returns
+      });
+    }
+
+    // ---- email capture ----
+    const form = document.getElementById('form');
+    const email = document.getElementById('email');
+    const hint = document.getElementById('hint');
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      const v = email.value.trim();
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      if (!ok) {
+        hint.textContent = "Ingresa un correo válido.";
+        hint.classList.remove('ok');
+        email.focus();
+        return;
+      }
+      hint.textContent = "¡Listo! Te avisamos pronto. ✦";
+      hint.classList.add('ok');
+      email.value = "";
+      email.blur();
+    });
+
+    // ---- floating object pool ----
+    // ONE pool of "floating objects", each tagged with a type. A render()
+    // builds the right markup per type, so chatter (text) and product
+    // fragments (rsvp / check / poll / stat) interleave through the same slots.
+    var PHRASES = [
+      "¿Quién trae la chela? 🍺", "Falta hielo 🧊", "¿Quién pone la música?", "Yo llevo el parlante 🔊",
+      "¿Alguien con carro?", "¿Dónde es la previa?", "Llevo el piqueo", "¿A qué hora caemos?",
+      "¿Quién se apunta?", "¿Quién organiza el after?", "Tal vez llego tarde", "¿Quién se prende al viaje?",
+      "Hoy se arma", "No falten 🔥", "Se viene la real", "¡Por fin nos juntamos!",
+      "Yo me apunto 🙋", "¿Hacemos reu el finde?", "Va a estar bravazo", "¿Quién tiene las fotos?",
+      "¿Vamos al tono?"
+    ];
+    var PROPS = [
+      { type: "rsvp" },
+      { type: "check", t: "Chelas · Marti" },
+      { type: "check", t: "Hielo · tú" },
+      { type: "poll", q: "¿Qué día?", a: "Sáb", b: "Dom" },
+      { type: "stat", t: "📍 Casa de Marti" },
+      { type: "stat", t: "S/ 25 por cabeza" },
+      { type: "stat", t: "💸 Pagado · 8/12" },
+      { type: "stat", t: "🎉 Parrillada · Sáb 8pm" },
+      { type: "stat", t: "📅 Guardado · Sáb 8pm" },
+      { type: "stat", t: "🎵 Playlist · 14 temas" },
+      { type: "stat", t: "📸 32 fotos" },
+      { type: "stat", t: "🔔 Mañana 8pm" },
+      { type: "stat", t: "Marti llegó 🎉" },
+      { type: "stat", t: "Llega en 5 min" },
+      { type: "stat", t: "✉️ Invitación enviada" },
+      { type: "stat", t: "Quedó épico · 28 fueron" }
+    ];
+    var POOL = PHRASES.map(function (t) { return { type: "text", t: t }; }).concat(PROPS);
+
+    function render(o) {
+      switch (o.type) {
+        case "rsvp": return '<span class="seg on">Voy</span><span class="seg">Tal vez</span><span class="seg">No</span>';
+        case "check": return '<span class="vk">✓</span><span class="vtxt">' + o.t + '</span>';
+        case "poll": return '<span class="vtxt">' + o.q + '</span><span class="seg on">' + o.a + '</span><span class="seg">' + o.b + '</span>';
+        default: return '<span class="vtxt">' + o.t + '</span>';   // text + stat
+      }
+    }
+
+    (function () {
+      var bag = [];
+      function draw() {
+        if (bag.length === 0) {                         // refill + shuffle
+          bag = POOL.slice();
+          for (var j = bag.length - 1; j > 0; j--) { var r = Math.floor(Math.random() * (j + 1)); var t = bag[j]; bag[j] = bag[r]; bag[r] = t; }
+        }
+        return bag.pop();
+      }
+      document.querySelectorAll('.chip').forEach(function (chip) {
+        function set() { var o = draw(); chip.dataset.type = o.type; chip.innerHTML = render(o); }
+        set();                                          // initial object
+        chip.addEventListener('animationiteration', set);
+      });
+    })();
+  })();
+</script>

@@ -1,0 +1,29 @@
+:root {
+  --lux: #e8cfa0;
+  --lux-bright: #f3e3c2;
+  --lux-dim: rgba(232, 207, 160, .62);
+  --lux-faint: rgba(232, 207, 160, .28);
+  --hair: rgba(238, 222, 196, .14);
+  --ink-soft: rgba(241, 232, 219, .78);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #0a0706;
+  color: #f4eae1;
+  font-family: "General Sans", "Hanken Grotesk", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

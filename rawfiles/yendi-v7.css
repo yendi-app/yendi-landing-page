@@ -1,0 +1,382 @@
+/* ============================================================
+   Yendi v7 — responsive + assisted scroll
+   Loaded LAST (after how / flow / lux).
+   · Desktop ≥861px : v4 phone setup untouched + proximity snap
+   · Mobile  ≤860px : each step = one full-viewport panel —
+     bare screen (no phone props) fills the top 65svh, caption
+     below, soft dissolve between them. Mandatory snap-stop
+     paging (one flick = one panel).
+   ============================================================ */
+
+/* ---------- brand ---------- */
+.ymark {
+  font-family: "Clash Display", "Hanken Grotesk", system-ui, sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 27px;
+  letter-spacing: -.02em;
+  color: #fff;
+  line-height: 1;
+}
+
+.ymark i {
+  font-style: inherit;
+  color: var(--lux, #e8cfa0);
+}
+
+.fin .ymark {
+  font-size: 34px;
+}
+
+/* ---------- assisted scroll (both modes) ---------- */
+html {
+  scroll-snap-type: y proximity;
+}
+
+.hero {
+  scroll-snap-align: start;
+}
+
+.step {
+  scroll-snap-align: center;
+}
+
+.step.finale {
+  scroll-snap-align: start;
+}
+
+/* finale owns a full screen everywhere (no leak from step 4) */
+.step.finale {
+  min-height: 100svh;
+}
+
+/* ---------- settled guard: once a step's entrance has played,
+   re-toggling .vis (to loop the in-screen micro-animations) must
+   never re-fade the copy/device/fin themselves ---------- */
+html.js .step.settled .copy,
+html.js .step.settled .device,
+html.js .step.settled .fin {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* ---------- slow the in-screen micro-animations (they read too fast) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+
+  .step.vis :is(.asso .sso, .aperks span, .covpick .sw, .frow, .finv.ok,
+    .ropt.on, .bk.done, .shero .big, .avrow .av, .avrow .avmore) {
+    animation-duration: .95s;
+  }
+
+  .step.vis .toast {
+    animation-duration: 1.1s;
+  }
+}
+
+/* ---------- mobile progress rail (steps only) ---------- */
+.vrail {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  left: 50%;
+  translate: -50% 0;
+  z-index: 40;
+  display: none;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+
+.vrail .rd {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(232, 207, 160, .3);
+  transition: all .45s cubic-bezier(.4, 0, .2, 1);
+}
+
+.vrail .rd.on {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--lux, #e8cfa0);
+}
+
+/* =====================================================================
+   MOBILE  ≤860px — one panel per step: screen 65svh on top, caption under
+   ===================================================================== */
+@media (max-width:860px) {
+
+  html,
+  body {
+    scroll-snap-type: y mandatory;
+  }
+
+  .hero,
+  .how-intro,
+  .step,
+  .step.finale {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .dbg {
+    display: none;
+  }
+
+  /* progress rail appears while inside the steps */
+  body.in-steps .vrail {
+    display: flex;
+  }
+
+  .how {
+    padding: 0;
+  }
+
+  /* chapter divider becomes its own full page */
+  .how-intro {
+    min-height: 100svh;
+    max-width: none;
+    margin: 0;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* --- the panel --- */
+  .step {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0;
+    min-height: 100svh;
+    max-width: none;
+    margin: 0;
+  }
+
+  .step:nth-of-type(even) {
+    flex-direction: column;
+  }
+
+  .step::before {
+    display: none;
+  }
+
+  /* champagne drop-line off */
+
+  /* --- TOP 65svh · the screen, contained as a floating card ---
+     No phone exterior, but a clear "screen" object: a narrow card,
+     slightly lighter than the page, hairline-edged, whose lower edge
+     DISSOLVES into the caption (mask fade — no hard line). --- */
+  .device {
+    order: -1;
+    flex: 0 0 65svh;
+    height: 65svh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    padding-top: max(46px, calc(env(safe-area-inset-top) + 30px));
+    isolation: auto;
+  }
+
+  .device::before {
+    display: none;
+  }
+
+  /* pedestal glow off */
+  .device::after {
+    content: none;
+  }
+
+  /* old hard-edged seam off */
+  .phone {
+    width: min(80vw, 310px);
+    height: 100%;
+    padding: 0;
+    border-radius: 24px 24px 0 0;
+    border: 1px solid rgba(238, 222, 196, .13);
+    border-bottom: none;
+    background: linear-gradient(180deg, #181310, #0f0c0a);
+    box-shadow: 0 26px 70px -24px rgba(0, 0, 0, .65);
+    overflow: hidden;
+    animation: none !important;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0 90%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0 90%, transparent 100%);
+  }
+
+  .phone::before,
+  .phone::after {
+    display: none !important;
+  }
+
+  /* island + rim off */
+  .scr {
+    border-radius: 0;
+    height: 100%;
+    font-size: 13px;
+    background: transparent;
+  }
+
+  .scr .sbar {
+    display: none;
+  }
+
+  /* no fake status bar */
+  .scr::after {
+    content: none;
+  }
+
+  /* keep key UI above the dissolve zone (bottom ~14% of the card) */
+  .cbtn {
+    margin-bottom: 52px;
+  }
+
+  .toast {
+    bottom: 76px;
+    left: 18px;
+    right: 18px;
+  }
+
+  .abody {
+    padding-bottom: 42px;
+  }
+
+  /* --- BOTTOM · the caption --- */
+  .copy {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 11px;
+    padding: 16px 28px max(24px, env(safe-area-inset-bottom));
+  }
+
+  .copy .step-k::after {
+    display: none;
+  }
+
+  .copy h2 {
+    font-size: clamp(28px, 7.6vw, 38px);
+  }
+
+  .copy p {
+    display: none;
+  }
+
+  /* caption stays tight */
+  .ticks {
+    align-items: center;
+    gap: 9px;
+  }
+
+  .ticks li {
+    text-align: left;
+    font-size: 14.5px;
+  }
+
+  /* entrance gating off on mobile — panels are always composed;
+     the active panel brightens instead */
+  html.js .step .copy,
+  html.js .step .device,
+  html.js .step .fin,
+  html.js .how-intro {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .step .copy {
+    opacity: .4;
+    transition: opacity .45s ease;
+  }
+
+  .step.active .copy,
+  .step.finale .copy {
+    opacity: 1;
+  }
+
+  /* --- in-screen recomposition (reclaim the chrome space) --- */
+  .abody {
+    padding-top: 16px;
+  }
+
+  .covprev {
+    height: 84px;
+  }
+
+  .ecover {
+    height: 84px !important;
+  }
+
+  /* finale fills its page, dead-center */
+  .step.finale {
+    justify-content: center;
+    align-items: center;
+    padding: 0 26px;
+  }
+}
+
+/* short phones: tighten the screens so nothing clips */
+@media (max-width:860px) and (max-height:740px) {
+  .scr {
+    font-size: 12.5px;
+  }
+
+  .covprev {
+    height: 70px;
+  }
+
+  .ecover {
+    height: 70px !important;
+  }
+
+  .cfield {
+    padding: 8px 12px;
+  }
+
+  .cgrid {
+    gap: 6px;
+  }
+
+  .brow {
+    padding: 7px 10px;
+    margin-bottom: 6px;
+  }
+
+  .cbtn {
+    margin-bottom: 48px;
+  }
+
+  .device {
+    padding-top: max(40px, calc(env(safe-area-inset-top) + 26px));
+  }
+
+  /* compact the caption — never hide the value props */
+  .copy {
+    gap: 8px;
+    padding-top: 12px;
+  }
+
+  .copy h2 {
+    font-size: clamp(24px, 6.4vw, 32px);
+  }
+
+  .ticks {
+    gap: 5px;
+  }
+
+  .ticks li {
+    font-size: 13px;
+  }
+}

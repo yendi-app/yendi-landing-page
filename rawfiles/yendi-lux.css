@@ -1,0 +1,504 @@
+/* ============================================================
+   Planazo landing v4 — LUX layer
+   Loaded LAST: refines planazo-how.css + planazo-flow.css
+   Champagne accent · metallic bezels · serif italics · hairlines
+   ============================================================ */
+
+:root {
+  --lux: #e8cfa0;
+  /* champagne */
+  --lux-bright: #f3e3c2;
+  --lux-dim: rgba(232, 207, 160, .62);
+  --lux-faint: rgba(232, 207, 160, .28);
+  --hair: rgba(238, 222, 196, .14);
+  /* warm hairline */
+  --ink-soft: rgba(241, 232, 219, .78);
+}
+
+/* ─────────── hero refinements (light touch) ─────────── */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--lux-dim);
+  letter-spacing: .46em;
+}
+
+.kicker::before,
+.kicker::after {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--lux-faint));
+}
+
+.kicker::after {
+  background: linear-gradient(90deg, var(--lux-faint), transparent);
+}
+
+.scrollcue {
+  color: var(--lux-dim);
+}
+
+.scrollcue:hover {
+  color: var(--lux-bright);
+}
+
+.field::before {
+  background: conic-gradient(from var(--cc-angle), transparent 0deg, transparent 250deg, rgba(232, 207, 160, .5) 312deg, #f3e3c2 340deg, rgba(232, 207, 160, .5) 360deg);
+  filter: drop-shadow(0 0 5px rgba(232, 207, 160, .55));
+}
+
+.field button {
+  background: linear-gradient(180deg, #f7eedd, #e9d6b0);
+  color: #231a10;
+}
+
+/* ─────────── section shell ─────────── */
+.how {
+  background: linear-gradient(to bottom, rgba(8, 6, 5, 0), rgba(8, 6, 5, .66) 180px, rgba(8, 6, 5, .84));
+}
+
+.step {
+  position: relative;
+  padding: 72px 26px;
+  gap: clamp(34px, 7vw, 96px);
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 58px;
+  background: linear-gradient(to bottom, rgba(232, 207, 160, 0), rgba(232, 207, 160, .42));
+}
+
+.step-k {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  letter-spacing: .42em;
+  color: var(--lux-dim);
+}
+
+.step .copy .step-k::after {
+  content: "";
+  width: 54px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--lux-faint), transparent);
+}
+
+.how-intro .step-k,
+.finale .step-k {
+  justify-content: center;
+}
+
+.how-intro h2,
+.copy h2,
+.fin h2 {
+  background: linear-gradient(180deg, #ffffff 18%, #ecdfc8 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.copy h2 {
+  font-size: clamp(28px, 4.6vw, 42px);
+  letter-spacing: -.015em;
+  line-height: 1.07;
+}
+
+.copy h2 em,
+.how-intro h2 em,
+.fin h2 em {
+  font-family: "Cormorant", "Clash Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.12em;
+  letter-spacing: 0;
+  color: var(--lux);
+  -webkit-text-fill-color: var(--lux);
+  padding-right: .06em;
+  /* italic overhang */
+}
+
+.copy p {
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  max-width: 42ch;
+}
+
+.ticks li {
+  color: rgba(241, 232, 219, .85);
+  font-weight: 450;
+}
+
+.ticks li::before {
+  content: "✦";
+  color: var(--lux);
+  font-size: 10.5px;
+  translate: 0 -1px;
+}
+
+/* ─────────── the device: metallic bezel, sheen, pedestal ─────────── */
+.device {
+  position: relative;
+  isolation: isolate;
+}
+
+.device::before {
+  /* ambient champagne glow behind the phone */
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 207, 160, .13), rgba(232, 207, 160, .04) 42%, transparent 64%);
+}
+
+.device::after {
+  /* contact shadow on the floor */
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: -30px;
+  translate: -50% 0;
+  width: 230px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, .6), transparent 72%);
+  filter: blur(5px);
+}
+
+.phone {
+  border: none;
+  padding: 10px;
+  background: linear-gradient(160deg, #332b23, #100d0b 36%, #1c1714 68%, #3b3128);
+  box-shadow:
+    0 70px 120px -28px rgba(0, 0, 0, .72),
+    0 28px 50px -16px rgba(0, 0, 0, .55),
+    inset 0 1px 0 rgba(243, 227, 194, .18);
+}
+
+.phone::after {
+  /* champagne metal rim */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  padding: 1.2px;
+  z-index: 7;
+  pointer-events: none;
+  background: linear-gradient(155deg, rgba(232, 207, 160, .65), rgba(255, 255, 255, .14) 28%, rgba(255, 255, 255, .03) 48%, rgba(232, 207, 160, .12) 70%, rgba(232, 207, 160, .45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.scr {
+  background: #0c0a09;
+}
+
+.scr::after {
+  /* one-time glass sheen sweep on reveal */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(115deg, transparent 36%, rgba(255, 255, 255, .06) 46%, rgba(243, 227, 194, .17) 50%, rgba(255, 255, 255, .05) 55%, transparent 64%);
+  background-size: 260% 100%;
+  background-position: 130% 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .step.vis .scr::after {
+    opacity: 1;
+    animation: luxSheen 1.6s cubic-bezier(.45, 0, .2, 1) .9s both;
+  }
+
+  @keyframes luxSheen {
+    from {
+      background-position: 130% 0;
+    }
+
+    to {
+      background-position: -130% 0;
+    }
+  }
+
+  .step.vis .phone {
+    animation: phoneFloat 8s ease-in-out 2.6s infinite;
+  }
+
+  @keyframes phoneFloat {
+
+    0%,
+    100% {
+      transform: translateY(0)
+    }
+
+    50% {
+      transform: translateY(-6px)
+    }
+  }
+}
+
+/* ─────────── color discipline: candy → champagne + jewel tones ─────────── */
+/* champagne replaces neon green / yellow everywhere except WhatsApp */
+.ticks li::before {
+  color: var(--lux);
+}
+
+.vbadge {
+  background: rgba(232, 207, 160, .13);
+  color: var(--lux);
+}
+
+.rsvp {
+  background: linear-gradient(180deg, #f3e3c2, #dfc28d);
+  color: #231a10;
+}
+
+.vk2 {
+  background: var(--lux);
+  color: #231a10;
+}
+
+.gn {
+  color: var(--lux);
+}
+
+.favstar {
+  color: var(--lux);
+}
+
+.fav.on {
+  background: rgba(232, 207, 160, .12);
+  border-color: rgba(232, 207, 160, .38);
+  color: var(--lux);
+}
+
+.me-av {
+  background: linear-gradient(180deg, #f3e3c2, #ddbf8a);
+}
+
+.sbar-ic b::after {
+  background: rgba(243, 227, 194, .9);
+}
+
+.aperks span::before {
+  color: var(--lux);
+}
+
+.finv.ok {
+  background: rgba(232, 207, 160, .14);
+  color: var(--lux);
+}
+
+.ropt.on {
+  background: linear-gradient(180deg, #f3e3c2, #dfc28d);
+  border-color: transparent;
+  color: #231a10;
+}
+
+.bk.done {
+  background: var(--lux);
+  color: #231a10;
+}
+
+.brow.mine {
+  border-color: rgba(232, 207, 160, .45);
+}
+
+.brow.mine .who {
+  color: var(--lux);
+}
+
+/* WhatsApp stays its brand green — that's a real-world anchor */
+
+/* jewel-toned avatars (muted from candy) */
+.av.c1 {
+  background: #d4789c;
+}
+
+.av.c2 {
+  background: #6db4cf;
+}
+
+.av.c3 {
+  background: #a9bf72;
+}
+
+.av.c4 {
+  background: #dcba74;
+}
+
+.av.c5 {
+  background: #ab95cf;
+}
+
+.av.c6 {
+  background: #d28e76;
+}
+
+.av.c7 {
+  background: #79bfae;
+}
+
+/* deeper, richer event gradients + inner vignette */
+.gx-fire {
+  background: linear-gradient(135deg, #e2643c, #9c2310);
+}
+
+.gx-cake {
+  background: linear-gradient(135deg, #d95b92, #dfae52);
+}
+
+.gx-grad {
+  background: linear-gradient(135deg, #b3873f, #e3c684);
+}
+
+.gx-trip {
+  background: linear-gradient(135deg, #3aa697, #4f9fcb);
+}
+
+.gx-fest {
+  background: linear-gradient(135deg, #6b3bd1, #c2418a);
+}
+
+.bigcover,
+.ecover,
+.covprev,
+.ethumb {
+  box-shadow: inset 0 0 52px rgba(0, 0, 0, .28);
+}
+
+/* ─────────── in-screen finish: hairlines + softer chrome ─────────── */
+.bigcard,
+.gcard,
+.cfield,
+.brow,
+.xcard,
+.slink {
+  border-color: var(--hair);
+}
+
+.bigcard {
+  background: rgba(255, 255, 255, .04);
+}
+
+.listhead,
+.brhead,
+.gsechead b,
+.gpriv {
+  color: var(--lux-dim);
+}
+
+.listhead,
+.brhead {
+  letter-spacing: .2em;
+  font-weight: 600;
+}
+
+.gsechead b {
+  color: #fff;
+}
+
+.bnav {
+  border-top-color: var(--hair);
+}
+
+.bnav .bplus {
+  background: linear-gradient(180deg, #f7eedd, #e6cfa2);
+  color: #231a10;
+  box-shadow: 0 0 14px rgba(232, 207, 160, .4);
+}
+
+.abtn,
+.cbtn {
+  background: linear-gradient(180deg, #f7eedd, #e9d6b0);
+  color: #231a10;
+  box-shadow: 0 8px 22px -8px rgba(232, 207, 160, .35);
+}
+
+.scopy {
+  background: rgba(232, 207, 160, .16);
+  color: var(--lux-bright);
+}
+
+.toast {
+  border-color: var(--hair);
+}
+
+.xtoggle b {
+  background: linear-gradient(180deg, #f7eedd, #e9d6b0);
+  color: #231a10;
+}
+
+.pin {
+  background: linear-gradient(180deg, #fdf8ee, #efddba);
+}
+
+.pin::after {
+  border-top-color: #efddba;
+}
+
+.when {
+  letter-spacing: .1em;
+}
+
+.covtag {
+  letter-spacing: .14em;
+}
+
+.sw.on {
+  outline-color: var(--lux);
+}
+
+/* finale */
+.fin p {
+  color: var(--ink-soft);
+}
+
+.finale .step-k::before,
+.finale .step-k::after {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: var(--lux-faint);
+}
+
+/* glow pulse retuned to champagne */
+@media (prefers-reduced-motion: no-preference) {
+  .step.vis .gnew {
+    animation-name: luxGlow;
+  }
+
+  .step.vis .cbtn {
+    animation-name: luxGlow;
+  }
+
+  @keyframes luxGlow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(232, 207, 160, 0);
+    }
+
+    50% {
+      box-shadow: 0 0 0 4px rgba(232, 207, 160, .16);
+    }
+  }
+}
