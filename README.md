@@ -53,7 +53,7 @@ It's not a traditional marketing page with copy blocks and CTA buttons. It's a *
 - **[Astro](https://astro.build)** (static output) — each major section is a self-contained `.astro` component with its own scoped `<style>` block.
 - **Plain CSS** — no Tailwind/CSS-in-JS. Shared tokens live in `global.css`; cross-cutting layout (the step shell) lives in `steps.css`; everything else is scoped per-component.
 - **Fonts** — Clash Display & General Sans via Fontshare, Hanken Grotesk & Cormorant via Google Fonts (loaded in [index.astro](src/pages/index.astro)).
-- No JS framework and (currently) no client-side script — see [BACKLOG.md](./BACKLOG.md) for the planned scroll-driven controller.
+- No JS framework — just small vanilla `<script>` blocks scoped to the components that need them (Hero's typewriter/blob conveyor, Capture's email submit, the keyboard-aware snap toggle in `index.astro`). The larger scroll-driven controller is still deferred — see [BACKLOG.md](./BACKLOG.md).
 
 ## Project Structure
 
@@ -66,7 +66,8 @@ It's not a traditional marketing page with copy blocks and CTA buttons. It's a *
 │   │   ├── BlobBackground.astro # blurred animated background layer
 │   │   ├── Hero.astro           # opening section + feature-chip conveyor
 │   │   ├── HowToSteps.astro     # 4-step plan-creation walkthrough
-│   │   └── Finale.astro         # closing CTA + email capture
+│   │   ├── Finale.astro         # closing CTA + email capture
+│   │   └── Capture.astro        # shared email-capture form (Hero + Finale)
 │   ├── pages/
 │   │   └── index.astro          # assembles the page, loads fonts/global styles
 │   └── styles/

@@ -43,10 +43,3 @@ still observed on low-end devices:
 
 **Status:** no measured problem since the stability pass — profile before
 acting.
-
-## Deduplicate the email capture form
-
-The capture form markup, styles, and submit handler exist twice (Hero and
-Finale), with the Apps Script URL hardcoded in both. Extract a shared
-`Capture.astro` component (or at least hoist the URL to one place) before
-the next change to either form.
