@@ -4,9 +4,13 @@ import BlobBackground from '../components/BlobBackground.astro';
 import Hero from '../components/Hero.astro';
 import HowToSteps from '../components/HowToSteps.astro';
 import Finale from '../components/Finale.astro';
+
+const description =
+	'Yendi es la app para armar tus planes: crea un plan, comparte un link y mira las confirmaciones en vivo. Coordinar tus reus, por fin fácil y bacán.';
+const canonical = new URL(import.meta.env.BASE_URL, Astro.site).href;
 ---
 
-<html lang="en">
+<html lang="es-PE">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
@@ -14,8 +18,23 @@ import Finale from '../components/Finale.astro';
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Yendi — Próximamente</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Yendi" />
+		<meta property="og:locale" content="es_PE" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content="Yendi — La app para armar tus planes" />
+		<meta property="og:description" content={description} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Yendi — La app para armar tus planes" />
+		<meta name="twitter:description" content={description} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Cormorant:ital,wght@1,500;1,600&display=swap"
 			rel="stylesheet" />

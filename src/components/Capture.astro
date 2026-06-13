@@ -1,0 +1,171 @@
+---
+
+---
+
+<form class="capture" novalidate>
+  <div class="field">
+    <input type="email" inputmode="email" autocomplete="email" placeholder="Email" aria-label="Email" />
+    <button type="submit">Avísame</button>
+  </div>
+  <div class="hint" role="status" aria-live="polite">Sé de los primeros en saber.</div>
+</form>
+
+<style>
+  .capture {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  @property --cc-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, .055);
+    border: 1.5px solid rgba(255, 255, 255, .14);
+    border-radius: 16px;
+    padding: 6px 6px 6px 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: border-color .35s ease, box-shadow .35s ease;
+  }
+
+  /* clockwise champagne glow sweeping the rim — signals "this is the action" */
+  .field::before {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    border-radius: inherit;
+    padding: 1.5px;
+    z-index: 1;
+    pointer-events: none;
+    background: conic-gradient(from var(--cc-angle), transparent 0deg, transparent 250deg, rgba(232, 207, 160, .5) 312deg, #f3e3c2 340deg, rgba(232, 207, 160, .5) 360deg);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    filter: drop-shadow(0 0 5px rgba(232, 207, 160, .55));
+    animation: ccSpin 3.6s linear infinite;
+  }
+
+  @keyframes ccSpin {
+    to { --cc-angle: 360deg; }
+  }
+
+  .field:focus-within {
+    border-color: rgba(255, 255, 255, .5);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, .12);
+  }
+
+  .field input {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: #f4eae1;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 11px 0;
+  }
+
+  .field input::placeholder {
+    color: rgba(244, 234, 225, .42);
+  }
+
+  .field button {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: #231a10;
+    background: linear-gradient(180deg, #f7eedd, #e9d6b0);
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition: transform .15s ease, filter .2s ease;
+  }
+
+  .field button:hover {
+    filter: brightness(1.06);
+  }
+
+  .field button:active {
+    transform: scale(.96);
+  }
+
+  .hint {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: rgba(244, 234, 225, .68);
+    letter-spacing: .01em;
+    height: 18px;
+    text-align: center;
+    transition: color .3s ease;
+  }
+
+  .hint.ok {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .field::before {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZHvZILIdHwkprDjDS5Zg04sYXRg6ou2r_-QIDs0TzUQfet5YFlXXTkxx5GWyLisz_aA/exec';
+
+  document.querySelectorAll<HTMLFormElement>('form.capture').forEach((form) => {
+    const email = form.querySelector('input');
+    const hint = form.querySelector('.hint');
+    if (!email || !hint) return;
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const value = email.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        hint.textContent = 'Ingresa un correo válido.';
+        hint.classList.remove('ok');
+        email.focus();
+        return;
+      }
+
+      hint.textContent = 'Enviando...';
+      hint.classList.remove('ok');
+
+      const body = new FormData();
+      body.append('email', value);
+
+      try {
+        await fetch(SCRIPT_URL, { method: 'POST', body, mode: 'no-cors' });
+        hint.textContent = '¡Listo! Te avisamos pronto. ✦';
+        hint.classList.add('ok');
+        email.value = '';
+        email.blur();
+      } catch {
+        hint.textContent = 'Algo salió mal. Intenta de nuevo.';
+        hint.classList.remove('ok');
+      }
+    });
+  });
+</script>
