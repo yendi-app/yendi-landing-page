@@ -52,7 +52,7 @@ import '../styles/steps.css';
     body.append('email', value);
 
     try {
-      await fetch(SCRIPT_URL, { method: 'POST', body });
+      await fetch(SCRIPT_URL, { method: 'POST', body, mode: 'no-cors' });
       hint.textContent = '¡Listo! Te avisamos pronto. ✦';
       hint.classList.add('ok');
       email.value = '';
