@@ -28,33 +28,25 @@ includes:
 **Status:** static version looks good without this — pure polish, deferred
 until there's appetite for the extra script + CSS complexity.
 
-## Finale email capture handler
+## Remaining BlobBackground / compositing follow-ups
 
-The "Avísame" form in `src/components/Finale.astro` (`#form2`/`#email2`/
-`#hint2`) currently does nothing on submit — it's markup only.
+The big-ticket items were fixed in the iOS stability pass (per-blob radial
+gradients instead of a 120px group blur, no layer rotation, chips lose
+`backdrop-filter` on mobile). Possible follow-ups if flicker or jank is
+still observed on low-end devices:
 
-Plan: wire it to a free form-backend service (e.g.
-[Web3Forms](https://web3forms.com/) or [Formspree](https://formspree.io/)) so
-submissions actually reach an inbox. Keep the existing client-side email
-validation/hint behavior from `rawfiles/yendi-v7.js` as a nice UX touch on
-top of the real submission.
+- `.grain` is a `position: fixed` layer with `mix-blend-mode: screen` over
+  animated content — drop the blend mode (or the layer) on mobile.
+- Chips still use `backdrop-filter` on desktop.
+- The `--cc-angle` conic-gradient sweep on the email field repaints with a
+  `drop-shadow` filter every frame; could be paused while off-screen.
 
-**Status:** this is the page's actual call-to-action, so worth doing before
-launch — just deferred while deciding on the form-backend provider.
+**Status:** no measured problem since the stability pass — profile before
+acting.
 
-## Desktop performance pass for BlobBackground
+## Deduplicate the email capture form
 
-`src/components/BlobBackground.astro` blurs the whole blob layer
-(`filter: blur(120px)`), and `Hero.astro` runs an infinite "conveyor" of
-floating feature chips with `backdrop-filter` per chip. On lower-end desktop
-hardware this combination (large blur radius/area + many blurred chips) could
-get expensive.
-
-Potential follow-ups if perf becomes an issue:
-- Reduce blob blur radius/size or pre-render the blurred wash as a static
-  background image.
-- Drop or simplify `backdrop-filter` on `.chip`.
-- Throttle or reduce the number of conveyor chips, especially off-viewport.
-
-**Status:** no measured problem yet — "port 1:1, then revisit" was the
-original framing. Worth a profiling pass before launch.
+The capture form markup, styles, and submit handler exist twice (Hero and
+Finale), with the Apps Script URL hardcoded in both. Extract a shared
+`Capture.astro` component (or at least hoist the URL to one place) before
+the next change to either form.

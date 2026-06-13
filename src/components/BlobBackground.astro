@@ -15,10 +15,10 @@
 </div>
 
 <style>
-  /* ---- z0 : page-wide backdrop = base color + drifting solid color blobs ----
+  /* ---- z0 : page-wide backdrop = base color + drifting soft color blobs ----
      position:fixed + 170vh tall so it covers the whole viewport regardless of
-     scroll position; visible through .how's translucent gradient too. The
-     whole layer is blurred as a group into a liquid wash. */
+     scroll position; visible through .how's translucent gradient too. Each
+     blob fades to transparent at its edge, blending into a liquid wash. */
   .bg {
     position: fixed;
     left: -8%;
@@ -28,17 +28,20 @@
     z-index: 0;
     overflow: hidden;
     transition: background-color 1.8s ease;
-    filter: blur(120px);
-    will-change: filter;
-    animation: bgRotate 16s ease-in-out infinite;
+  }
+
+  @property --c {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: transparent;
   }
 
   .blob {
     position: absolute;
     top: 0;
-    border-radius: 50%;
     opacity: .9;
-    transition: background-color 1.8s ease;
+    background: radial-gradient(circle closest-side, var(--c) 30%, transparent);
+    transition: --c 1.8s ease;
     will-change: transform, translate;
   }
 
@@ -54,11 +57,6 @@
   .s7 { width: 58vmax; height: 58vmax; right: 8vmax; animation: d3 31s ease-in-out infinite; }
   .s8 { width: 30vmax; height: 30vmax; left: 4vmax; animation: d4 23s ease-in-out infinite; }
   .s9 { width: 40vmax; height: 40vmax; right: -4vmax; animation: d1 29s ease-in-out infinite; }
-
-  @keyframes bgRotate {
-    0%, 100% { rotate: -1.2deg; }
-    50% { rotate: 1.2deg; }
-  }
 
   @keyframes d1 {
     0%, 100% { transform: translate(0, 0) scale(1); }

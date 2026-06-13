@@ -86,6 +86,14 @@
     will-change: transform, opacity;
   }
 
+  @media (max-width: 860px) {
+    .chip {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(255, 255, 255, .13);
+    }
+  }
+
   @keyframes chipFloat {
     0% { opacity: 0; transform: translateY(150px); }
     9% { opacity: .4; }
@@ -590,7 +598,7 @@
     function apply(it) {
       bg.style.backgroundColor = it.base;
       for (let k = 0; k < blobs.length; k++) {
-        blobs[k].style.backgroundColor = it.cols[k % it.cols.length];
+        blobs[k].style.setProperty('--c', it.cols[k % it.cols.length]);
       }
     }
 
@@ -608,8 +616,10 @@
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let start = null;
 
+    let band = window.innerHeight * BAND_VH;
+    window.addEventListener('resize', function () { band = window.innerHeight * BAND_VH; });
+
     function place(progress) {
-      const band = window.innerHeight * BAND_VH;
       for (let k = 0; k < N; k++) {
         let f = (blobs[k]._phase - progress) % 1;
         if (f < 0) f += 1;                // wrap into [0,1)
@@ -698,7 +708,7 @@
       body.append('email', v);
 
       try {
-        await fetch(SCRIPT_URL, { method: 'POST', body });
+        await fetch(SCRIPT_URL, { method: 'POST', body, mode: 'no-cors' });
         hint.textContent = "¡Listo! Te avisamos pronto. ✦";
         hint.classList.add('ok');
         email.value = "";

@@ -27,5 +27,18 @@ import Finale from '../components/Finale.astro';
 		<Hero />
 		<HowToSteps />
 		<Finale />
+		<script>
+			const root = document.documentElement;
+			const isTextField = (el: EventTarget | null) =>
+				el instanceof HTMLElement && el.matches('input, textarea');
+			document.addEventListener('focusin', (ev) => {
+				if (isTextField(ev.target)) root.classList.add('kb-open');
+			});
+			document.addEventListener('focusout', () => {
+				setTimeout(() => {
+					if (!isTextField(document.activeElement)) root.classList.remove('kb-open');
+				}, 50);
+			});
+		</script>
 	</body>
 </html>
