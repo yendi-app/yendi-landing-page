@@ -1,5 +1,6 @@
 ---
 import '../styles/steps.css';
+import coverFire from '../assets/cover-fire.jpeg';
 ---
 
 <div class="vrail" aria-hidden="true"><span class="rd"></span><span class="rd"></span><span class="rd"></span><span
@@ -15,12 +16,10 @@ import '../styles/steps.css';
   <section class="step" data-screen-label="Flujo · Entrar">
     <div class="copy">
       <span class="step-k">01 · Entra</span>
-      <h2>Entrar toma <em>10 segundos.</em></h2>
-      <p>Un código a tu correo y listo. O entra con las cuentas que ya usas todos los días.</p>
+      <h2><em>Ingresa en</em> segundos </h2>
       <ul class="ticks">
-        <li>Google, Facebook o WhatsApp</li>
-        <li>Foto de perfil opcional — la saltas si quieres</li>
-        <li>¿Tu cumpleaños? No te lo pedimos.</li>
+        <li>Entra con tu correo</li>
+        <li>Sin contraseñas que recordar</li>
       </ul>
     </div>
     <div class="device">
@@ -54,11 +53,10 @@ import '../styles/steps.css';
     <div class="copy">
       <span class="step-k">02 · Crea</span>
       <h2>Tu plan, <em>a tu estilo.</em></h2>
-      <p>Nombre, fecha y lugar — con eso basta. Elige un estilo que se sienta como tu fiesta y publica.</p>
       <ul class="ticks">
-        <li>Crear toma menos de un minuto</li>
+        <li>Crealo en menos de un minuto</li>
         <li>Portadas y estilos para cada ocasión</li>
-        <li>Cambia lo que quieras después — todos se enteran solos</li>
+        <li>Cambia lo que quieras después - todos se enteran solos</li>
       </ul>
     </div>
     <div class="device">
@@ -66,7 +64,7 @@ import '../styles/steps.css';
         <div class="scr" aria-hidden="true">
           <div class="sbar"><span>10:42</span><span class="sbar-ic"><i></i><i></i><i></i><b></b></span></div>
           <div class="chead"><b>Nuevo plan</b><span class="cx">✕</span></div>
-          <div class="covprev gx-fire"><span class="bce">🍖</span><span class="covtag">PORTADA</span></div>
+          <div class="covprev covphoto" style={`background-image:url(${coverFire.src})`}><span class="covtag">PORTADA</span></div>
           <div class="covpick">
             <span class="sw gx-fire on"></span>
             <span class="sw gx-cake"></span>
@@ -77,7 +75,7 @@ import '../styles/steps.css';
           </div>
           <div class="cfield focus">
             <small>Nombre del plan</small>
-            <b>Parrillada en lo de Marti<span class="acaret"></span></b>
+            <b>Parrillada en lo de Fer<span class="acaret"></span></b>
           </div>
           <div class="cgrid">
             <div class="cfield"><small>Cuándo</small><b>📅 Sáb · 8 PM</b></div>
@@ -85,7 +83,7 @@ import '../styles/steps.css';
           </div>
           <div class="cfield">
             <small>Lista de cosas</small>
-            <b>🍻 Chelas · 🧊 Hielo · 🍗 Piqueo</b>
+            <b>🍻 Chelas · 🧊 Pisco · 🍗 Chorizo</b>
           </div>
           <div class="cbtn">Crear plan ✦</div>
         </div>
@@ -97,12 +95,11 @@ import '../styles/steps.css';
   <section class="step" data-screen-label="Flujo · Compartir">
     <div class="copy">
       <span class="step-k">03 · Comparte</span>
-      <h2>Un link y <em>ya están todos.</em></h2>
-      <p>Mándalo por WhatsApp o donde sea. Tus amigos entran sin descargar nada ni crear cuenta.</p>
+      <h2>Un link <em> y estamos yendi</em></h2>
       <ul class="ticks">
-        <li>Un solo link para todo el grupo</li>
-        <li>Directo a WhatsApp, donde ya está tu gente</li>
-        <li>Invita de tu lista con un toque</li>
+        <li>Compartelo donde quieras</li>
+        <li>Confirman sin descargar nada</li>
+        <li>Todos coordinados en un solo lugar</li>
       </ul>
     </div>
     <div class="device">
@@ -114,7 +111,7 @@ import '../styles/steps.css';
             <b>¡Plan creado!</b>
             <small>Ahora invítalos — esto se arma solo</small>
           </div>
-          <div class="slink">yendi.app/p/parrillada-marti<span class="scopy">Copiar</span></div>
+          <div class="slink">yendi.app/p/parrillada-fer<span class="scopy">Copiar</span></div>
           <div class="swa">✆ Compartir por WhatsApp</div>
           <div class="sdiv">o invita directo</div>
           <div class="frow"><span class="av c2">J</span><span class="fmeta"><b>Joro</b><small>Siempre se
@@ -137,7 +134,7 @@ import '../styles/steps.css';
       <h2>Mira quién va, <em>en vivo.</em></h2>
       <p>Tus amigos responden con un toque y tú ves todo al instante: quiénes van, quién lleva qué y qué falta.</p>
       <ul class="ticks">
-        <li>Voy · Tal vez · No — un toque y listo</li>
+        <li>Yendi · Tal vez · No — un toque y listo</li>
         <li>Cada quien agarra algo de la lista</li>
         <li>Cero “¿al final quiénes van?” en el chat</li>
       </ul>
@@ -146,27 +143,27 @@ import '../styles/steps.css';
       <div class="phone">
         <div class="scr" aria-hidden="true">
           <div class="sbar"><span>10:51</span><span class="sbar-ic"><i></i><i></i><i></i><b></b></span></div>
-          <div class="ecover gx-fire" style="height:104px;"><span class="bce">🍖</span><span class="when">SÁB · 8
+          <div class="ecover covphoto" style={`height:104px;background-image:url(${coverFire.src})`}><span class="when">SÁB · 8
               PM</span></div>
           <div class="ehead">
-            <b class="etitle">Parrillada en lo de Marti</b>
-            <span class="ehost">Te invitó Marti · 📍 Su casa</span>
+            <b class="etitle">Parrillada en lo de Fer</b>
+            <span class="ehost">Te invitó Nico · 📍 Su casa</span>
           </div>
           <div class="rseg">
-            <span class="ropt on">Voy ✓</span>
+            <span class="ropt on">Yendi ✓</span>
             <span class="ropt">Tal vez</span>
             <span class="ropt">No</span>
           </div>
           <div class="rcount">
-            <span class="avrow"><span class="av c1">M</span><span class="av c2">J</span><span
+            <span class="avrow"><span class="av c1">N</span><span class="av c2">J</span><span
                 class="av c4">C</span><span class="av c3">D</span><span class="avmore">+8</span></span>
             <small>12 van · 3 tal vez</small>
           </div>
           <div class="brhead">¿Quién lleva qué?</div>
           <div class="brow"><span class="bk done">✓</span>Chelas<span class="who">Joro</span></div>
-          <div class="brow mine"><span class="bk done">✓</span>Hielo<span class="who">Tú 🙌</span></div>
-          <div class="brow"><span class="bk open">✓</span>Piqueo<span class="who">Libre</span></div>
-          <div class="toast"><span class="av c1">M</span>Marti: “¡Buenaza! Nos vemos el sábado 🎉”</div>
+          <div class="brow mine"><span class="bk done">✓</span>Pisco<span class="who">Tú 🙌</span></div>
+          <div class="brow"><span class="bk open">✓</span>Chorizo<span class="who">Libre</span></div>
+          <div class="toast"><span class="av c1">N</span>Nico: “¡Buenaza! Nos vemos el sábado 🎉”</div>
         </div>
       </div>
     </div>
@@ -627,7 +624,7 @@ import '../styles/steps.css';
 
   .covprev {
     margin: 0 16px;
-    height: 88px;
+    height: 132px;
     border-radius: 14px;
     position: relative;
     display: flex;
@@ -640,8 +637,22 @@ import '../styles/steps.css';
     font-size: 38px;
   }
 
+  .covphoto {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .covphoto::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(to top, rgba(0, 0, 0, .55), transparent 55%);
+  }
+
   .covtag {
     position: absolute;
+    z-index: 1;
     bottom: 8px;
     left: 9px;
     padding: 3px 8px;
@@ -927,6 +938,7 @@ import '../styles/steps.css';
 
   .when {
     position: absolute;
+    z-index: 1;
     top: 9px;
     left: 9px;
     padding: 4px 9px;
@@ -1214,7 +1226,7 @@ import '../styles/steps.css';
     }
 
     .covprev {
-      height: 84px;
+      height: 120px;
     }
 
     .ecover {
@@ -1273,7 +1285,7 @@ import '../styles/steps.css';
     }
 
     .covprev {
-      height: 70px;
+      height: 100px;
     }
 
     .ecover {
