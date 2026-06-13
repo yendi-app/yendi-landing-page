@@ -21,7 +21,7 @@ html {
 
 @media (max-width: 860px) {
   html {
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
   }
 }
 
